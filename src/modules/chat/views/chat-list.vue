@@ -2,13 +2,13 @@
   <ion-page>
     <Header />
     <ion-row class="header-row">
-      <ion-col size="5" class="left-col">
-        <ion-col size="9" class="back-section">
+      <ion-col class="left-col" size="5">
+        <ion-col class="back-section" size="9">
           <ion-label class="header-label">Mesajlar</ion-label>
         </ion-col>
       </ion-col>
 
-      <ion-col size="7" class="right-col">
+      <ion-col class="right-col" size="7">
         <div class="search-container">
           <ion-input class="search-input" placeholder="Ara" />
         </div>
@@ -17,7 +17,7 @@
 
     <ion-content class="ion-padding">
       <template v-if="isLoading">
-         <skeleton-message-list/>
+        <skeleton-message-list />
       </template>
 
       <template v-else>
@@ -51,15 +51,13 @@ import Header from "@/components/Header.vue";
 import SliderChatBox from "@/modules/chat/components/slider-chat-box.vue";
 import SkeletonMessageList from "@/modules/chat/components/skeletonMessageList.vue";
 
-import type {MessageData} from "@/types/chat.types";
+import type { MessageData } from "@/types/chat.types";
 
 import messageApi from "@/services/messageApi";
 import router from "@/router";
 
 const messageList = ref<MessageData[]>([]);
 const isLoading = ref(true);
-
-
 
 onMounted(() => {
   FetchMessageList();
@@ -69,7 +67,7 @@ const FetchMessageList = async () => {
   try {
     const messages = await messageApi.getMessageList();
     messageList.value = messages.data?.data.filter(
-        (item) => !item.from_is_deleted || !item.to_is_deleted
+      (item: MessageData) => !item.from_is_deleted || !item.to_is_deleted
     );
   } catch (error) {
     console.error(error);
@@ -78,7 +76,7 @@ const FetchMessageList = async () => {
   }
 };
 
-const openMessage = (msg:MessageData) => {
+const openMessage = (msg: MessageData) => {
   router.push({ name: "chat-detail", params: { id: msg.message_code } });
 };
 </script>

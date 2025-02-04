@@ -44,17 +44,20 @@ import {
   IonList,
   IonLabel, IonRow, IonCol, IonGrid
 } from '@ionic/vue';
-import {computed} from "vue";
+import {computed, PropType} from "vue";
 import {useAuthStore} from "@/stores/authStore";
+import  type {MessageData} from "@/types/chat.types";
 
 const props = defineProps({
   message:{
-    type:Object,
-    default:()=>{}
+    type:Object as PropType<MessageData>,
+    required:true
   }
 })
 
-const emit=defineEmits(['onClicked'])
+const emit = defineEmits<{
+  (event: 'onClicked', message: MessageData): void;
+}>();
 
 const userInfo = computed(()=>useAuthStore().user)
 
