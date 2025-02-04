@@ -72,15 +72,20 @@ const props = defineProps({
   }
 })
 
-const emit=defineEmits(['compare-products'])
+const emit = defineEmits<{
+  (event: 'compare-products', product: MessageData): void;
+}>();
 
 const authStore = useAuthStore();
 const myUserInfo = computed(() => authStore.user)
 
-const offerClass = ref('')
+const offerClass = ref<string>('')
 
 const isFrom = computed(() => props.origin === "from");
-const messageDetail = computed(() => props.message);
+const messageDetail = computed(() => props.message as MessageData);
+
+
+console.log("messageDetail",messageDetail.value)
 
 const getOfferInfo = (message:MessageData) => {
   //message?.offer_detail.offer_type === 'offer'
