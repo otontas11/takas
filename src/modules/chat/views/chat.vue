@@ -96,6 +96,7 @@ import {useAuthStore} from "@/stores/authStore";
 import {useChat} from "@/modules/chat/useChat";
 
 const {connectSocketConnection, cleanupSocketConnections, scrollToEnd, handleScroll, currentPage, isLoading} = useChat()
+import type {MessageData} from "@/types/chat.types";
 
 import ChatTextArea from "@/modules/chat/components/chat-text-area.vue";
 import LoadingSpinner from "@/modules/chat/components/loading-spinner.vue";
@@ -120,14 +121,13 @@ const toUserInfoId = ref('')
 const selectedProduct = ref({})
 const isProcessing = ref(false);
 
-const offerModalRef = ref(null)
-const compareProductsModalRef = ref(null)
-const buyProductModalRef = ref(null)
-const swapProductModalRef = ref(null)
+const offerModalRef = ref<InstanceType<typeof OfferModal> | null>(null);
+const compareProductsModalRef = ref<InstanceType<typeof CompareProductsModal> | null>(null);
+const buyProductModalRef = ref<InstanceType<typeof BuyProductModal> | null>(null);
+const swapProductModalRef = ref<InstanceType<typeof SwapProductsModal> | null>(null);
 
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const formData = ref<any>({
+const formData = ref({
   message_code: route.params.id,
   _to: "",
   message: "test",
@@ -145,7 +145,7 @@ const formData = ref<any>({
     // message: "test mesaji",
   },
   to_is_deleted: false
-})
+} as any)
 
 onMounted(() => {
   connectSocket()
@@ -251,7 +251,7 @@ const sendOfferResponse = async (params: { offerType: string; message: any }) =>
   }
 }
 
-const setUserIds = (msg) => {
+const setUserIds = (msg:MessageData) => {
   //amac ilk mesajı gönderen kişiyi bulup _to-id degerini bulmak , to id degeri zorunlu alan
   if (msg._from === myUserInfo.value.user_code) {
     toUserInfoId.value = msg._to
@@ -280,7 +280,7 @@ const sendDirectMessage = async () => {
   await scrollToEnd()
 }
 
-const openBuyOrSwapModal = (item) => {
+const openBuyOrSwapModal = (item: { type: 'buy' | 'swap' }) => {
   if (item.type === 'buy') {
     console.log("içerde")
     buyProductModalRef.value?.openModal()

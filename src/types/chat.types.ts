@@ -1,4 +1,4 @@
-// latest_offer/from_to arraylarinin içinde City verii
+// offer_detail/from_to arraylarinin içinde City verii
 export interface City {
     id: number;
     name: string;
@@ -13,7 +13,7 @@ export interface City {
     updated_at?: string | null;
 }
 
-// latest_offer/from_to arraylarinin içinde City verii
+// offer_detail/from_to arraylarinin içinde City verii
 export interface District {
     id: number;
     name: string;
@@ -28,7 +28,7 @@ export interface District {
     updated_at?: string | null;
 }
 
-// latest_offer/from_to arraylarinin içinde owner verisi
+// offer_detail/from_to arraylarinin içinde owner verisi
 export interface Owner {
     name: string;
     phone?: string;
@@ -39,7 +39,7 @@ export interface Owner {
     product_code: string;
 }
 
-// latest_offer/from_to arraylerini tutar
+// offer_detail/from_to arraylerini tutar
 export interface ProductFromTo {
     city?: City;
     district?: District;
@@ -50,7 +50,7 @@ export interface ProductFromTo {
 }
 
 //lastest offer objesi {from:[],to:[],price:2 ....}
-export interface LatestOffer {
+export interface OfferDetail {
     to: ProductFromTo[];
     from: ProductFromTo[];
     price: string;
@@ -68,7 +68,7 @@ export interface MessageData {
     message_code: string;
     _from: string;
     _to: string;
-    latest_offer: LatestOffer;
+    offer_detail: OfferDetail;
     from_is_deleted: boolean;
     to_is_deleted: boolean;
     created_at: string;

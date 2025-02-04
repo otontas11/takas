@@ -32,6 +32,7 @@ import {getImageUrl} from "@/assets/helpers/getImageUrl";
 const emit=defineEmits(['open-modal'])
 
 const isOpened=ref(false)
+
 const openModal=()=>{
   isOpened.value=true
 }
