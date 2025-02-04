@@ -66,6 +66,7 @@ onMounted(() => {
 const FetchMessageList = async () => {
   try {
     const messages = await messageApi.getMessageList();
+    console.log("message",messages)
     messageList.value = messages.data?.data.filter(
       (item: MessageData) => !item.from_is_deleted || !item.to_is_deleted
     );

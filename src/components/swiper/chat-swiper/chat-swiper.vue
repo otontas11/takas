@@ -1,13 +1,14 @@
 <template>
   <div class="chat-swiper">
-    <Swiper :navigation="true" :modules="modules" @swiper="onSwiper"  @slideChange="onSlideChange"  >
-      <SwiperSlide v-for="(offer,index) in offerData" :key="index" class="sss">
+    <Swiper :modules="modules" :navigation="true" @slideChange="onSlideChange">
+      <SwiperSlide v-for="(offer, index) in offerData" :key="index" class="sss">
         <ion-label class="owner-name">
           <ion-icon :icon="personCircleOutline" />
-          {{ offer?.owner?.name }}</ion-label>
+          {{ offer?.owner?.name }}
+        </ion-label>
 
         <ion-card class="swiper-wrapper">
-          <ion-avatar class="offer-count" >{{offerData.length}}</ion-avatar>
+          <ion-avatar class="offer-count">{{ offerData.length }}</ion-avatar>
 
           <div class="img-area">
             <ion-img :src="setImage(offer.image)" />
@@ -15,55 +16,51 @@
         </ion-card>
 
         <div class="image-info">
-          <div class="offer-name">{{offer?.name}}</div>
-          <div class="city">{{offer?.city?.name}}/{{offer?.district?.name}}</div>
-          <div v-if="offer?.price">{{offer?.price}} TL</div>
+          <div class="offer-name">{{ offer?.name }}</div>
+          <div class="city">
+            {{ offer?.city?.name }}/{{ offer?.district?.name }}
+          </div>
+          <div v-if="offer?.price">{{ offer.price }} TL</div>
         </div>
-
       </SwiperSlide>
     </Swiper>
   </div>
-
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { Navigation } from "swiper/modules";
-import { IonAvatar,IonCard, IonImg, IonIcon, IonLabel } from '@ionic/vue';
+import { IonAvatar, IonCard, IonImg, IonIcon, IonLabel } from "@ionic/vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { closeOutline, image, personCircleOutline } from 'ionicons/icons';
+import { personCircleOutline } from "ionicons/icons";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { PropType } from "vue";
+import type { ProductFromTo } from "@/types/chat.types";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const props=defineProps({
-  offerData:{
-    type:Array,
-    default:()=>[]
-  }
-})
+const props = defineProps({
+  offerData: {
+    type: Array as PropType<ProductFromTo>,
+    default: () => [],
+  },
+});
 
 const modules = [Navigation];
 
-const onSwiper = (swiper: any) => {
-  //console.log(swiper);
+const setImage = (img: string) => {
+  return `https://takasimos3.s3.eu-north-1.amazonaws.com${img}`;
 };
-
-const setImage=(img:string)=>{
-  return `https://takasimos3.s3.eu-north-1.amazonaws.com${img}`
-}
 
 const onSlideChange = () => {
   console.log("slide change");
 };
 </script>
 
-
 <style lang="scss" scoped>
 .chat-swiper {
-
   //background-color: #E5E5E5;
 
   .swiper-wrapper {
@@ -76,15 +73,15 @@ const onSlideChange = () => {
     display: flex;
     justify-content: space-between;
     margin-top: 8px;
+
     ion-icon {
       margin-right: 5px;
-      color: #901B6A;
-
+      color: #901b6a;
     }
   }
 
   .swiper-slide {
-    background: #E5E5E5 !important;
+    background: #e5e5e5 !important;
   }
 
   .swiper-slide {
@@ -92,14 +89,15 @@ const onSlideChange = () => {
     flex-direction: column;
   }
 
-
   .image-info {
     padding: 4px 0;
     font-weight: bold;
     color: black;
+
     .offer-name {
       font-size: 14px;
     }
+
     .city {
       font-size: 10px;
     }
@@ -109,8 +107,8 @@ const onSlideChange = () => {
     display: flex;
     flex-direction: column;
     box-shadow: initial;
-
   }
+
   .offer-count {
     position: absolute;
     z-index: 1;
@@ -129,8 +127,9 @@ const onSlideChange = () => {
     justify-content: center;
     align-items: center;
     overflow: hidden; /* Ensure content doesn't overflow the container */
-    background-color: #E5E5E5;
+    background-color: #e5e5e5;
   }
+
   ion-img {
     width: 120px;
     height: 120px;
@@ -162,6 +161,4 @@ const onSlideChange = () => {
     object-fit: cover;
   }
 }
-
-
 </style>

@@ -47,6 +47,7 @@ export interface ProductFromTo {
     image: string;
     owner?: Owner;
     product_code: string;
+    price?:string
 }
 
 //lastest offer objesi {from:[],to:[],price:2 ....}
