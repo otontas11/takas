@@ -29,7 +29,7 @@ export interface District {
 }
 
 // latest_offer/from_to arraylarinin içinde owner verisi
-interface Owner {
+export interface Owner {
     name: string;
     phone?: string;
     photo?: string | null;
@@ -40,7 +40,7 @@ interface Owner {
 }
 
 // latest_offer/from_to arraylerini tutar
-interface ProductFromTo {
+export interface ProductFromTo {
     city?: City;
     district?: District;
     name: string;
@@ -50,7 +50,7 @@ interface ProductFromTo {
 }
 
 //lastest offer objesi {from:[],to:[],price:2 ....}
-interface LatestOffer {
+export interface LatestOffer {
     to: ProductFromTo[];
     from: ProductFromTo[];
     price: string;
@@ -64,7 +64,7 @@ interface LatestOffer {
     targetOwnerInfo: Owner;
 }
 
-interface MessageData {
+export interface MessageData {
     message_code: string;
     _from: string;
     _to: string;

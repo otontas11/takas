@@ -49,11 +49,17 @@ import {
 
 import Header from "@/components/Header.vue";
 import SliderChatBox from "@/modules/chat/components/slider-chat-box.vue";
+import SkeletonMessageList from "@/modules/chat/components/skeletonMessageList.vue";
+
+import type {MessageData} from "@/types/chat.types";
+
 import messageApi from "@/services/messageApi";
 import router from "@/router";
-import SkeletonMessageList from "@/modules/chat/components/skeletonMessageList.vue";
-const messageList = ref<any[]>([]);
+
+const messageList = ref<MessageData[]>([]);
 const isLoading = ref(true);
+
+
 
 onMounted(() => {
   FetchMessageList();
@@ -72,7 +78,7 @@ const FetchMessageList = async () => {
   }
 };
 
-const openMessage = (msg) => {
+const openMessage = (msg:MessageData) => {
   router.push({ name: "chat-detail", params: { id: msg.message_code } });
 };
 </script>
