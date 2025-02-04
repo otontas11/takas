@@ -31,9 +31,11 @@
   </ion-list>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { IonList, IonItemSliding, IonItem, IonGrid, IonRow, IonCol, IonAvatar, IonSkeletonText, IonLabel } from '@ionic/vue';
+
 </script>
+
 
 <style lang="scss" scoped>
 .skeleton-text {
