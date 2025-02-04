@@ -288,7 +288,7 @@ const openBuyOrSwapModal = (item: { type: 'buy' | 'swap' }) => {
     swapProductModalRef.value?.openModal()
   }
 }
-
+/*
 const updateChangedMessage = async ({message}) => {
 
   const index = chatMessageList.value.findIndex(
@@ -302,7 +302,7 @@ const updateChangedMessage = async ({message}) => {
   } else {
     console.warn("Güncellenen mesaj listede bulunamadı.");
   }
-};
+};*/
 
 
 </script>

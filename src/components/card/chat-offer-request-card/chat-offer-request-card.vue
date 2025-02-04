@@ -3,29 +3,29 @@
     <ion-grid>
 
       <!--resimleri gosterme alanı - from to içinde resimler var-->
-      <ion-row v-if="messageData.offer_detail.from.length||messageData.offer_detail.to.length"
+      <ion-row v-if="messageDetail.offer_detail.from.length||messageDetail.offer_detail.to.length"
                :class="isFrom?'from-user-img':'to-user-img'"
                class="offer-images-area">
         <ion-col size="5">
-          <chat-swiper v-if="messageData.offer_detail.from.length" :offer-data="messageData.offer_detail.from"/>
+          <chat-swiper v-if="messageDetail.offer_detail.from.length" :offer-data="messageDetail.offer_detail.from"/>
         </ion-col>
         <ion-col class="direction-icon" size="2">
           <ion-img :src="directionImg" alt=""/>
         </ion-col>
         <ion-col size="5">
-          <chat-swiper  v-if="messageData.offer_detail.to.length" :offer-data="messageData.offer_detail.to"/>
+          <chat-swiper  v-if="messageDetail.offer_detail.to.length" :offer-data="messageDetail.offer_detail.to"/>
         </ion-col>
       </ion-row>
 
       <!-- paar teklifi, teklif incele, ütün mesajı alanalrı -->
       <ion-row :class="isFrom?'from-user':'to-user'" class="offer-review-area">
         <ion-col class="offer-review-area-wrapper" size="10">
-          <ion-label class="offer-info">{{ getOfferInfo(messageData) }}</ion-label>
-          <ion-button class="check-offer" fill="clear" @click="openCompareProductModal">Teklifi İncele</ion-button>
+          <ion-label class="offer-info">{{ getOfferInfo(messageDetail) }}</ion-label>
+          <ion-button class="check-offer" fill="clear" @click="openCompareProductModal(messageDetail)">Teklifi İncele</ion-button>
         </ion-col>
         <ion-col size="10">
-          <chat-text-area v-if="messageData.offer_detail?.productMessage"
-                          :origin="origin" :text="messageData.offer_detail.productMessage" class="chat-area"/>
+          <chat-text-area v-if="messageDetail.offer_detail?.productMessage"
+                          :origin="origin" :text="messageDetail.offer_detail.productMessage" class="chat-area"/>
           <slot/>
         </ion-col>
 
@@ -41,7 +41,7 @@
 
     <!-- offer_response =   iptal texti-->
     <div class="offer-response">
-      <ion-text v-if="messageData" :class="offerClass">{{ (messageData.offer_detail?.offer_response) }}
+      <ion-text v-if="messageDetail" :class="offerClass">{{ (messageDetail.offer_detail?.offer_response) }}
       </ion-text>
     </div>
 
@@ -53,12 +53,13 @@ import {IonGrid, IonCol, IonRow, IonImg, IonLabel, IonButton, IonText} from '@io
 import ChatSwiper from "@/components/swiper/chat-swiper/chat-swiper.vue";
 import ChatTextArea from "@/modules/chat/components/chat-text-area.vue";
 import directionImg from '@/assets/yon.png'
-import {computed, ref} from 'vue';
+import {computed, PropType, ref} from 'vue';
 import {useAuthStore} from "@/stores/authStore";
+import type {MessageData} from "@/types/chat.types";
 
 const props = defineProps({
   message: {
-    type: Object,
+    type: Object as PropType<MessageData>,
     default: () => ({})
   },
   origin: {
@@ -79,9 +80,9 @@ const myUserInfo = computed(() => authStore.user)
 const offerClass = ref('')
 
 const isFrom = computed(() => props.origin === "from");
-const messageData = computed(() => props.message);
+const messageDetail = computed(() => props.message);
 
-const getOfferInfo = (message) => {
+const getOfferInfo = (message:MessageData) => {
   //message?.offer_detail.offer_type === 'offer'
 
   if (message?.offer_detail.offer_type === 'request' && myUserInfo.value.user_code === message._from) {
@@ -95,7 +96,7 @@ const getOfferInfo = (message) => {
   }
 }
 
-const openCompareProductModal=(product)=>{
+const openCompareProductModal=(product:MessageData)=>{
   emit('compare-products',product)
 }
 
