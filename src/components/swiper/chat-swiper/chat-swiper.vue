@@ -43,7 +43,7 @@ import type { ProductFromTo } from "@/types/chat.types";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps({
   offerData: {
-    type: Array as PropType<ProductFromTo>,
+    type: Array as PropType<ProductFromTo[]>,
     default: () => [],
   },
 });

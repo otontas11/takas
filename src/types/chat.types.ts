@@ -43,10 +43,10 @@ export interface Owner {
 export interface ProductFromTo {
     city?: City;
     district?: District;
-    name: string;
-    image: string;
+    name?: string;
+    image?: string;
     owner?: Owner;
-    product_code: string;
+    product_code?: string;
     price?:string
 }
 
@@ -54,7 +54,7 @@ export interface ProductFromTo {
 export interface OfferDetail {
     to: ProductFromTo[];
     from: ProductFromTo[];
-    price: string;
+    price?: string;
     message: string | null;
     currency: string;
     offer_type: string;
@@ -63,6 +63,7 @@ export interface OfferDetail {
     offerStatus: boolean;
     productMessage?: string;
     targetOwnerInfo: Owner;
+    offer_response:string;
 }
 
 export interface MessageData {
