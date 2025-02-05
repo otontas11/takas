@@ -22,9 +22,6 @@
 //    "node_modules"
 //  ]
 //}
-
-
-
 {
   "compilerOptions": {
     "target": "ESNext",
@@ -36,26 +33,34 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM"],
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "skipLibCheck": true,
     "noEmit": true,
-    "paths": {
-      "@/*": ["./src/*"]
-    },
+    "allowJs": true,
+    "checkJs": false,
     "noImplicitAny": false,
-    "strictNullChecks": false,
     "noImplicitThis": false,
-    "alwaysStrict": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noImplicitReturns": false,
-    "noFallthroughCasesInSwitch": false,
-    "allowSyntheticDefaultImports": true,
-    "skipDefaultLibCheck": true
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": false,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "yedek/userInfoApi.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }],
-  "exclude": [
-    "node_modules"
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
   ]
 }
